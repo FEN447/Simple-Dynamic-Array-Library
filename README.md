@@ -1,2 +1,18 @@
-# Simple-Dynamic-Array-Library
-A simple dynamic array library made by freshman as a student's work.
+# dnmc_arr
+
+极简、静默、类型无关的 C 动态数组库。
+
+**设计理念**：
+- 库只提供最小机制（扩容/缩容等）
+- 用户承担全部策略责任
+- 静默记录执行结果
+- 静默阻止错误
+
+**特性：**
+- 11 个函数，无冗余
+- 头部分离设计，类型无关
+- 2 倍扩容/缩容策略
+- 显式状态码，静默运行
+
+**编译：**
+gcc your_program.c dnmc_arr.c -o your_program
