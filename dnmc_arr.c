@@ -104,6 +104,7 @@ void* darr_setlen(void* darr, size_t len) {
     }
     header *hdr = hdr_get(darr);
     if(len == hdr->len) {
+        hdr->stat = 0;
         return darr;
     }
     header *new_hdr = hdr_update(hdr, len);
@@ -117,10 +118,11 @@ void* darr_addlen(void* darr, size_t len) {
     if(!darr_test(darr)) {
         return NULL;
     }
+    header *hdr = hdr_get(darr);
     if(len == 0) {
+        hdr->stat = 0;
         return darr;
     }
-    header *hdr = hdr_get(darr);
     if(len > SIZE_MAX - hdr->len) {
         hdr->stat = -1;
         return darr;
