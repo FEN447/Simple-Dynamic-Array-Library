@@ -102,7 +102,11 @@ void* darr_setlen(void* darr, size_t len) {
     if(!darr_test(darr)) {
         return NULL;
     }
-    header *new_hdr = hdr_update(hdr_get(darr), len);
+    header *hdr = hdr_get(darr);
+    if(len == hdr->len) {
+        return darr;
+    }
+    header *new_hdr = hdr_update(hdr, len);
     if(new_hdr == NULL) {
         return darr;
     }
@@ -143,6 +147,9 @@ void* darr_clear(void* darr) {
 }
 
 void* darr_reset(void* darr, size_t esize) {
+    if(esize == 0) {
+        return NULL;
+    }
     void *new_darr = darr_clear(darr);
     if(new_darr == NULL) {
         return NULL;
