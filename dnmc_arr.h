@@ -16,17 +16,25 @@
 #ifndef DARR_SIZE_MAX_16
 #   define DARR_SIZE_MAX_CALC SIZE_MAX
 #   define DARR_BITS_MAX_CALC (sizeof(size_t) * 8)
-#else
-#   define DARR_SIZE_MAX_CALC UINT16_MAX
-#   define DARR_BITS_MAX_CALC 16
 #endif
-#else
+#endif
+#endif
+
+#if (defined(DARR_SIZE_MAX_64) + defined(DARR_SIZE_MAX_32) + defined(DARR_SIZE_MAX_16)) > 1
+#   error "Multiple DARR_SIZE_MAX macros defined."
+#endif
+
+#ifdef DARR_SIZE_MAX_64
+#   define DARR_SIZE_MAX_CALC UINT64_MAX
+#   define DARR_BITS_MAX_CALC 64
+#endif
+#ifdef DARR_SIZE_MAX_32
 #   define DARR_SIZE_MAX_CALC UINT32_MAX
 #   define DARR_BITS_MAX_CALC 32
 #endif
-#else
-#   define DARR_SIZE_MAX_CALC UINT64_MAX
-#   define DARR_BITS_MAX_CALC 64
+#ifdef DARR_SIZE_MAX_16
+#   define DARR_SIZE_MAX_CALC UINT16_MAX
+#   define DARR_BITS_MAX_CALC 16
 #endif
 
 #define DARR_STAT_EMPTY 0
